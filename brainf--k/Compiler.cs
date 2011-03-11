@@ -44,6 +44,11 @@ namespace brainf__k
 
             //Initialize memory.
             this.Memory = new byte[SIZE];
+            for (int i = 0; i < SIZE; i++)
+            {
+                this.Memory[i] = 0;
+            }
+
             this.Loop = new Stack<int>();
 
             //Execute the program.
@@ -52,10 +57,24 @@ namespace brainf__k
                 switch (this.Symbols[this.ExecutionPointer])
                 {
                     case '<':
-                        this.Pointer--;
+                        if (this.Pointer > 0)
+                        {
+                            this.Pointer--;
+                        }
+                        else
+                        {
+                            this.Pointer = SIZE - 1;
+                        }
                         break;
                     case '>':
-                        this.Pointer++;
+                        if (this.Pointer < SIZE)
+                        {
+                            this.Pointer++;
+                        }
+                        else
+                        {
+                            this.Pointer = 0;
+                        }
                         break;
                     case '+':
                         this.Memory[this.Pointer]++;
